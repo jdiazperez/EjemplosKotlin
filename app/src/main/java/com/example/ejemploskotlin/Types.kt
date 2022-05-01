@@ -1,4 +1,4 @@
-package com.diagroup.storecatalog.data.local.converters
+package com.example.ejemploskotlin
 
 class Types {
 
