@@ -9,7 +9,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //lambdas()
-        collectionFunctions()
+        //collectionFunctions()
+        highOrderFuns()
     }
 
     fun lambdas() {
@@ -55,5 +56,33 @@ class MainActivity : AppCompatActivity() {
         val peopleByAgeMap = peopleList.groupBy { it.age }
         // Imprime: {28=[Person(firstName=Jorge, surname=Díaz, age=28), Person(firstName=María, surname=Fernández, age=28)], 19=[Person(firstName=José, surname=García, age=19)], 62=[Person(firstName=David, surname=González, age=62)]}
         Log.i("peopleByAge", peopleByAgeMap.toString())
+    }
+
+    inline fun compareNumber(
+        first: Int,
+        second: Int,
+        onFirstBiggerOrEqual: () -> Unit,
+        onSecondBigger: () -> Unit
+    ) {
+        if (first >= second) {
+            onFirstBiggerOrEqual()
+        } else {
+            onSecondBigger()
+        }
+    }
+
+    fun highOrderFuns() {
+        compareNumber(
+            2,
+            1,
+            { println("El primero es más grande") },
+            { println("El segundo es más grande") }
+        )
+        compareNumber(
+            2,
+            1,
+            { println("El primero es mayor que el segundo") },
+            { println("El segundo es mayor que el primero") }
+        )
     }
 }
