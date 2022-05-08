@@ -3,9 +3,9 @@ package com.example.ejemploskotlin
 import android.util.Log
 
 data class Person(
-    val firstName: String = "Jorge",
-    val surname: String = "Díaz Pérez",
-    val age: Int = 28
+    var firstName: String = "Jorge",
+    var surname: String = "Díaz Pérez",
+    var age: Int = 28
 ) {
 
     companion object {

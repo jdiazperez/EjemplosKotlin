@@ -3,6 +3,7 @@ package com.example.ejemploskotlin
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,7 +11,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //lambdas()
         //collectionFunctions()
-        highOrderFuns()
+        //highOrderFuns()
+        scopefunctions7()
     }
 
     fun lambdas() {
@@ -84,5 +86,68 @@ class MainActivity : AppCompatActivity() {
             { println("El primero es mayor que el segundo") },
             { println("El segundo es mayor que el primero") }
         )
+    }
+
+    fun scopefunctions() {
+        var person: Person? = Person("José", "García", 18)
+        val personString = person?.let {
+            "Nombre: ${it.firstName}, Apellidos: ${it.surname}, Edad: ${it.age}"
+        }
+        println(personString)
+        person = null
+    }
+
+    fun scopefunctions2() {
+        val person = Person("José", "García", 18)
+        val personString = with(person) {
+            "Nombre: $firstName, Apellidos: $surname, Edad: $age"
+        }
+        println(personString)
+    }
+
+    fun scopefunctions3() {
+        val person = Person("José", "García", 18)
+        val personString = person.run {
+            "Nombre: $firstName, Apellidos: $surname, Edad: $age"
+        }
+        println(personString)
+    }
+
+    fun scopefunctions4() {
+        val person = Person().apply {
+            firstName = "José"
+            surname = "García"
+            age = 18
+        }
+        val personString =
+            "Nombre: ${person.firstName}, Apellidos: ${person.surname}, Edad: ${person.age}"
+        println(personString)
+    }
+
+    fun scopefunctions5() {
+        Person("José", "García", 18)
+            .also { println("Antes de modificar la edad: Nombre: ${it.firstName}, Edad: ${it.age}") }
+            .apply { age = 19 }
+            .also { println("Después de modificar la edad: Nombre: ${it.firstName}, Edad: ${it.age}") }
+    }
+
+    fun scopefunctions6() {
+        Random.nextInt().takeIf { it % 2 == 0 }.also {
+            if (it != null) {
+                println("El número generado es par: $it")
+            } else {
+                println("El número generado es impar")
+            }
+        }
+    }
+
+    fun scopefunctions7() {
+        Random.nextInt().takeUnless { it % 2 == 0 }.also {
+            if (it != null) {
+                println("El número generado es impar: $it")
+            } else {
+                println("El número generado es par")
+            }
+        }
     }
 }
